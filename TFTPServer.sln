@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34518.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TFTPServer", "TFTPServer\TFTPServer.csproj", "{279FDCD7-1332-4C43-B591-A601DEA2712B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFTPClient", "TFTPClient\TFTPClient.csproj", "{488522E2-6FB5-4C6C-ACEB-4AD9EA1CFE24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{279FDCD7-1332-4C43-B591-A601DEA2712B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279FDCD7-1332-4C43-B591-A601DEA2712B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279FDCD7-1332-4C43-B591-A601DEA2712B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279FDCD7-1332-4C43-B591-A601DEA2712B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{488522E2-6FB5-4C6C-ACEB-4AD9EA1CFE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{488522E2-6FB5-4C6C-ACEB-4AD9EA1CFE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{488522E2-6FB5-4C6C-ACEB-4AD9EA1CFE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{488522E2-6FB5-4C6C-ACEB-4AD9EA1CFE24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1E92D06-E63E-4264-935F-AD6550204074}
+	EndGlobalSection
+EndGlobal
