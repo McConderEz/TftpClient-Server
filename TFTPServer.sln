@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34518.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TFTPServer", "TFTPServer\TFTPServer.csproj", "{279FDCD7-1332-4C43-B591-A601DEA2712B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFTPClient", "TFTPClient\TFTPClient.csproj", "{488522E2-6FB5-4C6C-ACEB-4AD9EA1CFE24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TFTPClient", "TFTPClient\TFTPClient.csproj", "{488522E2-6FB5-4C6C-ACEB-4AD9EA1CFE24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

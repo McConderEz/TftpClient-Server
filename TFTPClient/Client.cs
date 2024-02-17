@@ -1,6 +1,7 @@
 ﻿using GSF.IO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -31,7 +32,7 @@ namespace TFTPClient
 
                     Console.WriteLine("Download completed.");
 
-                    var path = filename.Split(new char[] { '/', '\\'} );
+                    var path = filename.Split(new char[] { '/', '\\' });
 
                     using (FileStream fileStream = new FileStream(targetDir + path[path.Length - 1], FileMode.Create, FileAccess.Write))
                     {
@@ -55,13 +56,16 @@ namespace TFTPClient
                 MemoryStream memoryStream = new MemoryStream();
                 using (FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
+                    memoryStream.Position = 0;
                     fileStream.CopyTo(memoryStream);
                 }
                 _transfer.OnFinished += (transfer) =>
                 {
                     Console.WriteLine("Upload completed.");
                 };
+                memoryStream.Position = 0;
                 _transfer.Start(memoryStream);
+
             }
             catch (Exception ex)
             {

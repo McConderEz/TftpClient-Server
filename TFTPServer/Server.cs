@@ -14,7 +14,7 @@ namespace TFTPServer
         private TftpServer _tftpServer;
         private static string _serverDirectory;
 
-        
+
         public Server()
         {
             _serverDirectory = "C:\\tftp";
@@ -22,31 +22,38 @@ namespace TFTPServer
             _tftpServer.OnReadRequest += new TftpServerEventHandler(server_OnReadRequest);
             _tftpServer.OnWriteRequest += new TftpServerEventHandler(server_OnWriteRequest);
             _tftpServer.Start();
-            
-            
+
+
             Console.WriteLine($"Сервер TFTP запущен для директории: {_serverDirectory}");
-            
+
         }
 
         static void server_OnReadRequest(ITftpTransfer transfer, EndPoint client)
         {
-            String path = Path.Combine(_serverDirectory, transfer.Filename);
-            FileInfo file = new FileInfo(path);
-            OutputTransferStatus(transfer, "Accepting request from " + client);
-            StartTransfer(transfer, new FileStream(file.FullName, FileMode.Open, FileAccess.Read));
-
-            if (!file.FullName.StartsWith(_serverDirectory, StringComparison.InvariantCultureIgnoreCase))
+            try
             {
-                CancelTransfer(transfer, TftpErrorPacket.AccessViolation);
-            }
-            else if (!file.Exists)
-            {
-                CancelTransfer(transfer, TftpErrorPacket.FileNotFound);
-            }
-            else
-            {
+                String path = Path.Combine(_serverDirectory, transfer.Filename);
+                FileInfo file = new FileInfo(path);
                 OutputTransferStatus(transfer, "Accepting request from " + client);
                 StartTransfer(transfer, new FileStream(file.FullName, FileMode.Open, FileAccess.Read));
+
+                if (!file.FullName.StartsWith(_serverDirectory, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    CancelTransfer(transfer, TftpErrorPacket.AccessViolation);
+                }
+                else if (!file.Exists)
+                {
+                    CancelTransfer(transfer, TftpErrorPacket.FileNotFound);
+                }
+                else
+                {
+                    OutputTransferStatus(transfer, "Accepting request from " + client);
+                    StartTransfer(transfer, new FileStream(file.FullName, FileMode.Open, FileAccess.Read));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -55,21 +62,31 @@ namespace TFTPServer
             transfer.OnProgress += new TftpProgressHandler(transfer_OnProgress);
             transfer.OnError += new TftpErrorHandler(transfer_OnError);
             transfer.OnFinished += new TftpEventHandler(transfer_OnFinished);
+            stream.Position = 0;
             transfer.Start(stream);
+
+
         }
         static void server_OnWriteRequest(ITftpTransfer transfer, EndPoint client)
         {
-            String file = Path.Combine(_serverDirectory, transfer.Filename);
-            OutputTransferStatus(transfer, "Accepting write request from " + client);
-            StartTransfer(transfer, new FileStream(file, FileMode.CreateNew));
-            if (File.Exists(file))
+            try
             {
-                CancelTransfer(transfer, TftpErrorPacket.FileAlreadyExists);
-            }
-            else
-            {
+                String file = Path.Combine(_serverDirectory, transfer.Filename);
                 OutputTransferStatus(transfer, "Accepting write request from " + client);
                 StartTransfer(transfer, new FileStream(file, FileMode.CreateNew));
+                if (File.Exists(file))
+                {
+                    CancelTransfer(transfer, TftpErrorPacket.FileAlreadyExists);
+                }
+                else
+                {
+                    OutputTransferStatus(transfer, "Accepting write request from " + client);
+                    StartTransfer(transfer, new FileStream(file, FileMode.CreateNew));
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -100,3 +117,4 @@ namespace TFTPServer
         }
     }
 }
+

@@ -2,4 +2,4 @@
 using TFTPServer;
 
 Server server = new Server();
-Console.ReadKey();
+Console.Read();
